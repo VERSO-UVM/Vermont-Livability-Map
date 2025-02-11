@@ -8,7 +8,7 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="45" height="45" />
       <nav id="site-nav">
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/regional">Regional Highlights</RouterLink>
+        <!-- <RouterLink to="/regional">Regional Highlights</RouterLink> -->
       </nav>
     
       <section class="hero">
