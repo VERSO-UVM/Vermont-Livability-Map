@@ -101,7 +101,7 @@ sup {
   <main>
     <div class="container has-text-centered" style="max-width: 700px; margin-top: 100px; margin-bottom: 100px">
       <p style="font-size: 1.5rem;">
-        The Vermont Zoning Atlas is a database and web tool that brings together zoning laws from 1,755 districts across the state of Vermont. Its goal is to help answer fundamental questions facing cities and towns: for the land that we have, what can be built?
+        The Vermont Livability Map is a pilot project of to explore how create database and web tools that brings together zoning laws and other datasets to help answer fundamental questions facing cities and towns: for the land that we have, what can be built?
       </p>
     </div>
     <section class="section is-medium">
@@ -129,7 +129,7 @@ sup {
       <div class="columns">
         <div class="column">
           <p>
-            The Vermont Zoning Atlas began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia.
+            The <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">Vermont Zoning Atlas</a> began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia.
           </p>
           <p>
             Over nine months of work, the Atlas grew from a handful of volunteers passionate about housing justice to 36 specially trained Zoning Analysts, GIS Specialists, and team leads funded by the state of Vermont, University of Vermont fellowships, an anonymous donor, and the Vermont Community Foundation. Using a methodology published by the National Zoning Atlas, the team analyzed 1,755 districts across 209 zoned and 57 unzoned jurisdictions. 

@@ -16,7 +16,7 @@ import HelloWorld from './components/HelloWorld.vue'
   <div class="hero-body">
     <div class="columns">
       <div class="column">
-        <h1 class="title">Vermont Zoning Atlas</h1>
+        <h1 class="title">Vermont Livability Map</h1>
         <h3 class="subtitle">Open data for building strong, resilient communities.</h3>
       </div>
     </div>  
