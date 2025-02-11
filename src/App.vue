@@ -9,7 +9,6 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav id="site-nav">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/regional">Regional Highlights</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
       </nav>
     
       <section class="hero">
