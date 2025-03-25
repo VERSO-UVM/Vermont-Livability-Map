@@ -12,7 +12,7 @@
   </template>
 
 <script setup>
-import ZoningMap from '@/components/ZoningMap.vue';
+import ZoningMap from '@/components/RegionalMapHighlight.vue';
 
 </script>
 
