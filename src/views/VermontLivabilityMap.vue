@@ -43,7 +43,7 @@
   const selectedJurisdiction = ref(null);
   const map = ref(null);
 
-// Define WIMArray
+// Defined WIMArray
 const WIMArray = [
   { id: "1", rpc: "NVDA", jurisdiction: "Troy", wwtf: 2, service: "0%", soilw: "5.44%" },
   { id: "2", rpc: "NVDA", jurisdiction: "Newport City", wwtf: 1, service: "39.25%", soilw: "17.79%" },
@@ -181,6 +181,7 @@ const updateMap = () => {
   }
 
   // Example jurisdiction coordinates
+  //TODO: reference fgb files instead of hard-coded coordinates
   const coordinates = {
     "Troy": [44.9056, -72.4101],
     "Newport City": [44.9364, -72.2056],
@@ -188,8 +189,10 @@ const updateMap = () => {
     "Lunenburg": [44.4600, -71.6933],
     "Hardwick": [44.5044, -72.3625],
     "Coventry": [44.9017, -72.2469],
-    "Brattleboro": [42.8509, -72.5579]
-  };
+    "Brattleboro": [42.8509, -72.5579],
+    "Windham": [43.1512, -72.7176]
+};
+
 
   if (coordinates[selectedJurisdiction.value]) {
     map.value.setView(coordinates[selectedJurisdiction.value], 12);
@@ -213,7 +216,6 @@ const updateMap = () => {
   max-width: 400px;
   margin: auto;
 }
-
 .statistics-box h2 {
     text-align: center;
     font-weight: bolder;
