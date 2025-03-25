@@ -248,6 +248,8 @@ let map;
 
                 mapFeatures.value = features;
 
+                console.log(features)
+
                 // Fit map to data bounds
                 const bounds = new mapboxgl.LngLatBounds();
                 features.forEach(feature => {
@@ -263,6 +265,9 @@ let map;
                 map.fitBounds(bounds, { padding: 50 });
 
                 console.log('Map visualization complete');
+
+                // console out values
+                console.log('Zoning types and colors:', Array.from(zoningColors.entries()));
 
             } catch (error) {
                 console.error('Error loading FlatGeoBuf data:', error);
@@ -345,6 +350,8 @@ let map;
   // Lifecycle hooks
   onMounted(() => {
     initializeMap();
+    // console out data
+    
   });
   
   onUnmounted(() => {
