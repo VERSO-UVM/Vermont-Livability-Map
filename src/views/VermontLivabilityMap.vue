@@ -213,4 +213,10 @@ const updateMap = () => {
   max-width: 400px;
   margin: auto;
 }
+
+.statistics-box h2 {
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: underline;
+}
 </style>
