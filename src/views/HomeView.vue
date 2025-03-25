@@ -132,7 +132,7 @@ sup {
             The <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">Vermont Zoning Atlas</a> began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia.
           </p>
           <p>
-            Zoning is complicated, 93% of total residential zones land allowing 1F by right and 7% of total residential land allowing 1F by public hearing. As the nbumber of households grow the percentage of those that can be built be right decreases. In Vermont zoned land, 82% allow 2 family homes with 67% by right and 15% by public hearing. 3 family homes are allowed on 50% of zoned land with 12% by right and 38% by public hearing. 4 family homes are allowed on 48% of zoned land with 3% by right and 45% by public hearing.
+            Zoning is complicated, 93% of total residential zones land allowing single family homes by right and 7% require public hearing. As the number of households grow, the percentage of those that can be built without a public hearing decreases. In Vermont zoned land, 82% allow 2 family homes with 67% by right and 15% by public hearing. 3 family homes are allowed on 50% of zoned land with 12% by right and 38% by public hearing. 4 family homes are allowed on 48% of zoned land with 3% by right and 45% by public hearing.
  
           </p>
         </div>
