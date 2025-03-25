@@ -5,10 +5,12 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="45" height="45" />
+    <!--  SPACE TO PUT VT LIVABILITY MAP LOGO  -->
+    <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="45" height="45" /> -->
       <nav id="site-nav">
-        <!-- <RouterLink to="/">Home</RouterLink> -->
-        <!-- <RouterLink to="/regional">Regional Highlights</RouterLink> -->
+        <!-- NEW -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/vermont-livability">Towns</router-link> 
       </nav>
     
       <section class="hero">
