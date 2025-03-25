@@ -22,9 +22,10 @@
       <!-- Statistics Summary Box -->
       <div class="statistics-box">
         <h2>Statistics Summary</h2>
-        <p v-if="selectedJurisdiction">Showing data for: {{ selectedJurisdiction }}</p>
+        <p v-if="selectedJurisdiction"><strong>Selected Jurisdiction:</strong> {{ selectedJurisdiction }}</p>
         <p v-else>Select a jurisdiction to see details.</p>
         <ul>
+          <li><strong>RPC:</strong> {{ stats.rpc }}</li>
           <li><strong>WWTF:</strong> {{ stats.wwtf }}</li>
           <li><strong>Service:</strong> {{ stats.service }}</li>
           <li><strong>Soil Water Content:</strong> {{ stats.soilw }}</li>
@@ -137,6 +138,7 @@ const sortedJurisdictions = computed(() =>
 
 // Default stats
 const stats = ref({
+  rpc: "N/A",
   wwtf: "N/A",
   service: "N/A",
   soilw: "N/A"
@@ -171,6 +173,7 @@ const updateMap = () => {
   
   if (selectedData) {
     stats.value = {
+      rpc: selectedData.rpc,
       wwtf: selectedData.wwtf,
       service: selectedData.service,
       soilw: selectedData.soilw
