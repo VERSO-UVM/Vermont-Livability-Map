@@ -10,7 +10,7 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav id="site-nav">
         <!-- NEW -->
         <router-link to="/">Home</router-link>
-        <router-link to="/vermont-livability">Vermont Livability Map</router-link> 
+        <router-link to="/vermont-livability">Towns</router-link> 
       </nav>
     
       <section class="hero">
