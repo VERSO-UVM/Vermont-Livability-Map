@@ -1,12 +1,13 @@
 <!-- ZoningMap.vue -->
 <template>
-    <div class="map-container">
-        <div class="disclaimer">
+    <div>
+        <div class="map-container">
+            <div class="disclaimer">
             <span class="exclamation-icon">!</span>
             This map is in Beta, and may contain inaccuracies.
         </div>
         <div class="controls">
-            <label for="jurisdiction-search">Search Jurisdiction:</label>
+            <label style="margin-right: 10px" for="jurisdiction-search">Search Jurisdiction:</label>
             <input
                 id="jurisdiction-search"
                 type="text"
@@ -31,24 +32,15 @@
         <div id="zoning-map-legend" class="legend">
             <h4>Primary zoning classification</h4>
         </div>
-        <div v-if="filteredData.length" class="data-table">
-            <h4>Jurisdiction Data</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th v-for="(value, key) in filteredData[0].properties" :key="key">{{ key }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="feature in filteredData" :key="feature.id">
-                        <td v-for="(value, key) in feature.properties" :key="key">{{ value }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        </div>
+        <div v-if="zoningTypeBreakdown.length" class="zoning-type-breakdown">
+            <h3 style="text-align: center; font-weight: 600">% of districts per zoning type</h3>
+            <div v-for="(item, index) in zoningTypeBreakdown" :key="index">
+                <ProgressBar :title="item.type" :percentage="item.percentage" />
+            </div>
         </div>
         <div v-if="filteredData.length" class="data-summary">
             <h4>Jurisdiction Summary</h4>
-            <p>Number of unique objects: {{ uniqueObjectCount }}</p>
             <table>
                 <thead>
                     <tr>
@@ -62,16 +54,16 @@
                 </tbody>
             </table>
         </div>
+        
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch, reactive } from 'vue';
 import * as mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { geojson } from 'flatgeobuf';
-import { watch } from 'vue'
-import { reactive } from 'vue';
+import ProgressBar from '@/components/ProgressBar.vue';
 
 // Props
 const props = defineProps({
@@ -108,9 +100,33 @@ const filteredJurisdictions = ref([]);
 const filteredData = ref([]);
 
 // Reactive data for display fields and unique object count
-const displayFields = ref(["Affordable_Housing_District", "Type_of_Zoning_District"]); // Specify fields to display
+const displayFields = ref(["Full_District_Name","Affordable_Housing_District", "Type_of_Zoning_District"]); // Specify fields to display
 const displayedData = ref([]); // Store filtered data for specified fields
 const uniqueObjectCount = ref(0); // Store the count of unique objects
+
+// Reactive data for zoning type breakdown
+const zoningTypeBreakdown = ref([]);
+
+// Watch filteredData to compute zoning type breakdown
+watch(filteredData, (newData) => {
+  if (!newData.length) {
+    zoningTypeBreakdown.value = [];
+    return;
+  }
+
+  const total = newData.length;
+  const typeCounts = {};
+
+  newData.forEach((feature) => {
+    const type = feature.properties.Type_of_Zoning_District || 'Unknown';
+    typeCounts[type] = (typeCounts[type] || 0) + 1;
+  });
+
+  zoningTypeBreakdown.value = Object.entries(typeCounts).map(([type, count]) => ({
+    type,
+    percentage: ((count / total) * 100).toFixed(2),
+  }));
+});
 
 // Store the last valid bounds as a fallback
 let lastValidBounds = null;
@@ -200,17 +216,10 @@ const applyJurisdictionFilter = () => {
         } else {
             console.warn("Bounds are empty. Unable to fit map.");
             if (mapFeatures.value.length > 0) {
-                const firstFeature = mapFeatures.value[1];
-                if (firstFeature.geometry) {
-                    const coords = firstFeature.geometry.coordinates;
-                    if (firstFeature.geometry.type === 'Polygon') {
-                        coords[0].forEach((coord) => bounds.extend(coord));
-                    } else if (firstFeature.geometry.type === 'Point') {
-                        bounds.extend(coords);
-                    }
-                    console.log("Using first feature's geometry to fit bounds:", bounds);
-                    map.fitBounds(bounds, { padding: 50 });
-                }
+                // use default bounds
+                console.log("Using default bounds as fallback.");
+                const defaultBounds = new mapboxgl.LngLatBounds([-73.5, 42.5], [-71.5, 45.0]); // Example default bounds
+                map.fitBounds(defaultBounds, { padding: 50 });
             } else if (lastValidBounds) {
                 console.log("Using last valid bounds as fallback:", lastValidBounds);
                 map.fitBounds(lastValidBounds, { padding: 50 });
@@ -563,6 +572,10 @@ onUnmounted(() => {
     margin-right: 10px;
 }
 
+#zoning-map {
+    margin-top: 20px
+}
+
 #zoning-map { width: 100%; height: 700px; }
 .map-container {
     position: relative;
@@ -611,8 +624,17 @@ onUnmounted(() => {
     border: 1px solid #ccc;
 }
 .controls {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     position: relative;
+}
+
+.controls input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    height: 30px;
+    margin-right: 20px
 }
 
 .suggestions {
@@ -656,6 +678,11 @@ onUnmounted(() => {
     margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
+    overflow-x: scroll;
+}
+
+table th {
+    color: black
 }
 
 .data-table table {
@@ -691,5 +718,10 @@ onUnmounted(() => {
 
 .data-summary th {
     background-color: #f4f4f4;
+}
+
+/* Add styles for zoning type breakdown if needed */
+.zoning-type-breakdown {
+  margin-top: 20px;
 }
 </style>
