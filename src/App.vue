@@ -14,7 +14,8 @@ import HelloWorld from './components/HelloWorld.vue'
       <div class="column">
         <nav id="site-nav">
         <!-- NEW -->
-        <!-- <router-link to="/">Home</router-link> -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
         <!-- <router-link to="/regional">Regional Highlight</router-link>  -->
       </nav>
       </div>
