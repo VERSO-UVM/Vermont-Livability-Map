@@ -12,6 +12,7 @@
     "buefy": "npm:@ntohq/buefy-next@^0.1.4",
     "d3": "^7.9.0",
     "flatgeobuf": "^3.35.0",
+    "leaflet": "^1.9.4",
     "mapbox-gl": "^3.7.0",
     "pinia": "^2.2.6",
     "vue": "^3.5.12",
@@ -20,6 +21,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
-    "vite": "^5.4.10"
+    "vite": "^6.2.3"
   }
 }
