@@ -9,8 +9,8 @@ import HelloWorld from './components/HelloWorld.vue'
     <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="45" height="45" /> -->
       <nav id="site-nav">
         <!-- NEW -->
-        <router-link to="/">Home</router-link>
-        <router-link to="/vermont-livability">Towns</router-link> 
+        <!-- <router-link to="/">Home</router-link> -->
+        <!-- <router-link to="/regional">Regional Highlight</router-link>  -->
       </nav>
     
       <section class="hero">
