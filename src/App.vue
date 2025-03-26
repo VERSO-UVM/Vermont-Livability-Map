@@ -7,22 +7,18 @@ import HelloWorld from './components/HelloWorld.vue'
   <header>
     <!--  SPACE TO PUT VT LIVABILITY MAP LOGO  -->
     <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="45" height="45" /> -->
-      <nav id="site-nav">
+    <div class="columns">
+      <div class="column">
+        <h1 class="title">Vermont Livability Map</h1>
+      </div>
+      <div class="column">
+        <nav id="site-nav">
         <!-- NEW -->
         <!-- <router-link to="/">Home</router-link> -->
         <!-- <router-link to="/regional">Regional Highlight</router-link>  -->
       </nav>
-    
-      <section class="hero">
-  <div class="hero-body">
-    <div class="columns">
-      <div class="column">
-        <h1 class="title">Vermont Livability Map</h1>
-        <h3 class="subtitle">Open data for building strong, resilient communities.</h3>
       </div>
     </div>  
-  </div>
-</section>
   </header>
 
   <RouterView />

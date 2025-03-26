@@ -118,7 +118,7 @@ sup {
             Zoning laws regulate the types of housing that can be built. But for ordinary people, they can be complex, overwhelming, and hard to find. The Vermont Zoning Atlas takes inspiration from the National Zoning Atlas project to "digitize, demystify, and democratize information" that is often hidden under many layers of hard to parse paperwork. 
           </p>
           <p>
-            As a rural state, Vermont's zoning laws can be especially difficult to find and understand. Many towns use their own methods of record keeping and governance. But we believe that universal access to this information is critical for smart community growth.
+            As a rural state, Vermont's zoning laws can be especially difficult to find and understand. In Vermont 75% of land has some form of zoning with 88% of that being primarily residential or mixed with residential.  Many towns use their own methods of record keeping and governance. But we believe that universal access to this information is critical for smart community growth.
           </p>
         </div>
       </div>
@@ -132,7 +132,8 @@ sup {
             The <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">Vermont Zoning Atlas</a> began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia.
           </p>
           <p>
-            Over nine months of work, the Atlas grew from a handful of volunteers passionate about housing justice to 36 specially trained Zoning Analysts, GIS Specialists, and team leads funded by the state of Vermont, University of Vermont fellowships, an anonymous donor, and the Vermont Community Foundation. Using a methodology published by the National Zoning Atlas, the team analyzed 1,755 districts across 209 zoned and 57 unzoned jurisdictions. 
+            Zoning is complicated, 93% of total residential zones land allowing single family homes by right and 7% require public hearing. As the number of households grow, the percentage of those that can be built without a public hearing decreases. In Vermont zoned land, 82% allow 2 family homes with 67% by right and 15% by public hearing. 3 family homes are allowed on 50% of zoned land with 12% by right and 38% by public hearing. 4 family homes are allowed on 48% of zoned land with 3% by right and 45% by public hearing.
+ 
           </p>
         </div>
         <div class="column">
@@ -239,7 +240,7 @@ sup {
         >
             <div class="step centered" data-step-no="null">
               <p>
-              This map shows the approximate boundaries of Montpelier, Vermont's capital city. Using open data, we can add layers to understand our public systems.
+              This is the town of Montpelier, Vermont's capital city. Using open data, we can add layers to understand our public systems.
               </p>
             </div>
             <div class="step centered" data-step-no="4">
