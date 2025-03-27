@@ -1,6 +1,6 @@
 <template>
     <div class="stacked-bar-container">
-        <h2>Permitting Requirements for Four Family plus Building (like apartment buildings)</h2>
+        <h2 style="margin-left: 20px; font-weight: bold">{{ title }}</h2>
       <svg :width="width" :height="height" ref="svgRef"></svg>
       <br>
       <div class="legend">
@@ -24,22 +24,32 @@
     height: {
       type: Number,
       default: 100
+    },
+    title: {
+      type: String,
+      default: 'Land by primary zoning type'
+    },
+    data: {
+      type: Array,
+      default: () => [
+        { category: 'Primarily Residential or Mixed with Residential', percentage: 65.5 },
+        { category: 'Nonresidential', percentage: 8.5 },
+        { category: 'Unzoned', percentage: 25.00 }
+      ]
     }
   })
   
   const svgRef = ref(null)
   
-  const data = [
-    { category: 'By Right', percentage: 2 },
-    { category: 'Requires a Public Hearing', percentage: 34 },
-    { category: 'Prohibited', percentage: 39 },
-    { category: 'Unzoned', percentage: 25.00 }
-  ]
+  const data = props.data;
+
+  // if only 3 categories, use three color range
+  const colorRange = data.length === 3 ? ['#4B8BBF', '#A25FAC', '#909090'] : ['#4B8BBF', '#A25FAC', '#E53032','#909090']
   
   // Color scale
   const colorScale = d3.scaleOrdinal()
     .domain(data.map(d => d.category))
-    .range(['#4B8BBF', '#A25FAC', '#E53032','#909090'])
+    .range(colorRange)
   
   onMounted(() => {
     const svg = d3.select(svgRef.value)
@@ -94,12 +104,12 @@
       .style('font-size', '12px')
       .text(d => d.percentage >= 4 ? `${d.percentage}%` : '')
   })
-</script>
+  </script>
   
   <style scoped>
   .stacked-bar-container {
-    margin-bottom: 100px;
-    margin-top: 50px
+    margin-bottom: 0px;
+    margin-top: 20px
   }
   
   .legend {

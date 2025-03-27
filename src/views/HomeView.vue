@@ -3,7 +3,7 @@ import MontpelierMap from '@/components/MontpelierMap.vue';
 import ZoningMap from '@/components/ZoningMap.vue';
 import { ref } from 'vue';
 import { watch } from 'vue';
-import StackedBarOverall from '@/components/StackedBarOverall.vue';
+import StackedBar from '@/components/StackedBar.vue';
 import StackedBar1F from '@/components/StackedBar1F.vue';
 import StackedBar2F from '@/components/StackedBar2F.vue';
 import StackedBar3F from '@/components/StackedBar3F.vue';
@@ -12,6 +12,39 @@ import StackedBar4F from '@/components/StackedBar4F.vue';
 import VueScrollama from 'vue3-scrollama'
     let currStep = ref(null);
     let highlightForMap = ref(null);
+
+    const dataOverall = [
+        { category: 'Primarily Residential or Mixed with Residential', percentage: 65.5 },
+        { category: 'Nonresidential', percentage: 8.5 },
+        { category: 'Unzoned', percentage: 25.00 }
+      ]
+
+      const data1f = [
+        { category: 'By Right', percentage: 70 },
+        { category: 'Requires a Public Hearing', percentage: 5 },
+        { category: 'Unzoned', percentage: 25.00 }
+      ]
+
+      const data2f = [
+      { category: 'By Right', percentage: 50 },
+      { category: 'Requires a Public Hearing', percentage: 12 },
+      { category: 'Prohibited', percentage: 13 },
+      { category: 'Unzoned', percentage: 25.00 }
+    ]
+
+    const data3f = [
+      { category: 'By Right', percentage: 9.5 },
+      { category: 'Requires a Public Hearing', percentage: 28 },
+      { category: 'Prohibited', percentage: 37.5 },
+      { category: 'Unzoned', percentage: 25.00 }
+    ]
+
+    const data4f = [
+    { category: 'By Right', percentage: 2 },
+    { category: 'Requires a Public Hearing', percentage: 34 },
+    { category: 'Prohibited', percentage: 39 },
+    { category: 'Unzoned', percentage: 25.00 }
+  ]
 
     // when current step changes add class show-img to image
     watch(currStep, (newVal) => {
@@ -183,15 +216,16 @@ sup {
         <br>
         In housing permitting, "by right" means a project can be built if it follows all the rules, without needing extra approvals. "Public hearing" means the project must be reviewed in a meeting where people can share their opinions before it gets approved. In Vermont 25% of land is unzoned, but for the rest what is the process for building homes? 
       </h2>
-      <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; position: relative;">>
+      <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; position: relative;">
+        
+        <StackedBar :width="800" :height="100" title="Permitting Requirements for Single Family Home" :data="data1f" />
+
+        <StackedBar :width="800" :height="100" title="Permitting Requirements for Two Family Building (like a duplex or condo)" :data="data2f" />
+
+        <StackedBar :width="800" :height="100" title="Permitting Requirements for Three Family Building" :data="data3f" />
+
+        <StackedBar :width="800" :height="100" title="Permitting Requirements for Four Family plus Building (like apartment buildings)" :data="data4f" />
   
-        <StackedBar1F :width="800" :height="100" />
-      
-        <StackedBar2F :width="800" :height="100" />
-      
-        <StackedBar3F :width="800" :height="100" />
-      
-        <StackedBar4F :width="800" :height="100" />
       </div>
       <h1 class="title">Exploring the Zoning Atlas</h1>
       <h2 class="subtitle">
