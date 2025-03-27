@@ -26,13 +26,13 @@ a,
   justify-content: space-between;
   align-items: end;
   margin-bottom: 2rem;
-  max-width: 400px;
+  max-width: 600px;
   margin-left: auto;
   
 }
 
 #site-nav a {
-  padding: 12px;
+  padding: 8px;
 }
 
 p {
