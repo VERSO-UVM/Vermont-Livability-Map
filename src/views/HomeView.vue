@@ -4,10 +4,7 @@ import ZoningMap from '@/components/ZoningMap.vue';
 import { ref } from 'vue';
 import { watch } from 'vue';
 import StackedBar from '@/components/StackedBar.vue';
-import StackedBar1F from '@/components/StackedBar1F.vue';
-import StackedBar2F from '@/components/StackedBar2F.vue';
-import StackedBar3F from '@/components/StackedBar3F.vue';
-import StackedBar4F from '@/components/StackedBar4F.vue';
+
 
 import VueScrollama from 'vue3-scrollama'
     let currStep = ref(null);
@@ -210,7 +207,7 @@ sup {
         </div>
       </div>
     </section>
-    <section class="" id="zoning-overview">
+    <section class="container" id="zoning-overview">
       <h1 class="title">Zoning Requirements for Building Homes for Vermont</h1>
       <h2 class="subtitle">
         <br>
@@ -227,6 +224,8 @@ sup {
         <StackedBar :width="800" :height="100" title="Permitting Requirements for Four Family plus Building (like apartment buildings)" :data="data4f" />
   
       </div>
+      <br>
+      <br>
       <h1 class="title">Exploring the Zoning Atlas</h1>
       <h2 class="subtitle">
         Exploring the Zoning Atlas Map can tell us a little more about how zoning may be different by region. Keep scrolling down to see the map and learn more about the data.
