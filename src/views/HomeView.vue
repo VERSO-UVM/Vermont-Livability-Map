@@ -138,26 +138,25 @@ sup {
           <p>
             The <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">Vermont Zoning Atlas</a> began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia. It inspired the creation of the Wastewater Infrastructure Mapping Project and the creating of this tool to understand it all. 
             </p>
-            <p>
-            This project is a collaboration between the University of Vermont, the Vermont Center for Geographic Information, and the Vermont Agency of Commerce and Community Development, Vermont Housing Finance Agency and many more. We are grateful for the support of the Vermont Community Foundation, private donations, and the hard work of our volunteers.
+          <p>
+            The Livability Map contains data (<a href="https://verso-uvm.github.io/Vermont-Livability-Map/about">learn more</a>) on zoning (Vermont is complete, data fixes and updates are underway), wastewater (60% complete, in progress), and flood basins (completed for the Champlain Basin, rest of Vermont is in progress). We hope to add more data in the future to help Vermonters understand the complex systems that govern our communities.
           </p>
           <p>
-            The Livability Map contains data on zoning, wastewater, and flood basins, all of which are in various levels of completion. We hope to add more data in the future to help Vermonters understand the complex systems that govern our communities.
- 
+            This project is a collaboration between the University of Vermont, the Vermont Center for Geographic Information, and the Vermont Agency of Commerce and Community Development, Vermont Housing Finance Agency and many more. We are grateful for the support of the Vermont Community Foundation, private donations, and the hard work of our volunteers.
           </p>
         </div>
         <div class="column">
           <div class="level">
             <div class="level-item has-text-centered">
-              <div>
-                <p class="title">1,755</p>
-                <p class="heading">districts</p>
-                
+              <div><p class="title">247</p>
+                <p class="heading">towns and cities</p>
               </div>
             </div>
             <div class="level-item has-text-centered">
-              <div><p class="title">36</p>
-                <p class="heading">analysts</p>
+              <div>
+                <p class="title">1,755</p>
+                <p class="heading">zoning Jurisdiction</p>
+                
               </div>
             </div>
           </div>
@@ -165,13 +164,13 @@ sup {
             <div class="level-item has-text-centered">
               <div>
                 <p class="title">57</p>
-                <p class="heading">unzoned</p>
+                <p class="heading">unzoned regions</p>
               </div>
             </div>
             <div class="level-item has-text-centered">
               <div>
-                <p class="title">209</p>
-                <p class="heading">zoned</p>
+                <p class="title">75%</p>
+                <p class="heading">zoned land area</p>
               </div>
             </div>
           </div>
