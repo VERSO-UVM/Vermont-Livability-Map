@@ -1,8 +1,5 @@
 <template>
   <main>
-    <!-- <h1 class="title">Vermont Livability Map & Statistical Analysis</h1> -->
-    
-    <!-- Jurisdiction Dropdown -->
     <div class="search-container">
       <label for="jurisdiction">Select a Jurisdiction:   </label>
       <select v-model="selectedJurisdiction" @change="updateMap">
@@ -16,10 +13,46 @@
       </select>
     </div>
 
-    <!-- Dynamic Map -->
+    <!-- Map -->
     <div id="map"></div>
 
-    <!-- Statistics Summary Box -->
+    <!-- Checkboxes -->
+    <div class="layer-selector">
+      <label>
+        <input type="checkbox" v-model="layers.nvdaPointLayer" @change="toggleLayer('nvdaPointLayer')">
+        Show NVDA Point Layer
+      </label>
+      <label>
+        <input type="checkbox" v-model="layers.nvdaLinearLayer" @change="toggleLayer('nvdaLinearLayer')">
+        Show NVDA Linear Layer
+      </label>
+      <label>
+        <input type="checkbox" v-model="layers.nvdaServiceLayer" @change="toggleLayer('nvdaServiceLayer')">
+        Show NVDA Service Layer
+      </label>
+      <label>
+        <input type="checkbox" v-model="layers.nvdaWwtfLayer" @change="toggleLayer('nvdaWwtfLayer')">
+        Show NVDA WWTF Layer
+      </label>
+      <label>
+        <input type="checkbox" v-model="layers.wrcPointLayer" @change="toggleLayer('wrcPointLayer')">
+        Show WRC Point Layer
+      </label>
+      <label>
+        <input type="checkbox" v-model="layers.wrcLinearLayer" @change="toggleLayer('wrcLinearLayer')">
+        Show WRC Linear Layer
+      </label>
+      <label>
+        <input type="checkbox" v-model="layers.wrcServiceLayer" @change="toggleLayer('wrcServiceLayer')">
+        Show WRC Service Layer
+      </label>
+      <label>
+        <input type="checkbox" v-model="layers.wrcWwtfLayer" @change="toggleLayer('wrcWwtfLayer')">
+        Show WRC WWTF Layer
+      </label>
+    </div>
+
+    <!-- Statistics box -->
     <div class="statistics-box">
       <h2>Statistics Summary</h2>
       <p v-if="selectedJurisdiction"><strong>Selected Jurisdiction:</strong> {{ selectedJurisdiction }}</p>
@@ -34,34 +67,55 @@
   </main>
 </template>
 
+<!-- Render map, layers, and reference statistics -->
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-// Needed to update the map style
 import 'leaflet-providers';
 
-
+// Defined reactive properties
 const selectedJurisdiction = ref(null);
 const map = ref(null);
+const layers = ref({
+  nvdaPointLayer: false,
+  nvdaLinearLayer: false,
+  nvdaServiceLayer: false,
+  nvdaWwtfLayer: false,
+  wrcPointLayer: false,
+  wrcLinearLayer: false,
+  wrcServiceLayer: false,
+  wrcWwtfLayer: false,
+});
+
+const layerCache = ref({
+  nvdaPointLayer: null,
+  nvdaLinearLayer: null,
+  nvdaServiceLayer: null,
+  nvdaWwtfLayer: null,
+  wrcPointLayer: null,
+  wrcLinearLayer: null,
+  wrcServiceLayer: null,
+  wrcWwtfLayer: null,
+});
 
 // Defined WIMArray
 const WIMArray = [
-{ id: "1", rpc: "NVDA", jurisdiction: "Troy", wwtf: 2, service: "0%", soilw: "5.44%" },
-{ id: "2", rpc: "NVDA", jurisdiction: "Newport City", wwtf: 1, service: "39.25%", soilw: "17.79%" },
-{ id: "3", rpc: "NVDA", jurisdiction: "Lyndon", wwtf: 1, service: "18.08%", soilw: "21.21%" },
-{ id: "4", rpc: "NVDA", jurisdiction: "Lunenburg", wwtf: 2, service: "0%", soilw: "0.29%" },
-{ id: "5", rpc: "NVDA", jurisdiction: "Hardwick", wwtf: 1, service: "4.24%", soilw: "7.57%" },
-{ id: "6", rpc: "NVDA", jurisdiction: "Coventry", wwtf: 1, service: "0%", soilw: "5.00%" },
-{ id: "7", rpc: "NVDA", jurisdiction: "Canaan", wwtf: 2, service: "2.75%", soilw: "4.10%" },
-{ id: "8", rpc: "NVDA", jurisdiction: "Barton", wwtf: 1, service: "4.12%", soilw: "4.03%" },
-{ id: "9", rpc: "NVDA", jurisdiction: "Barnet", wwtf: 1, service: "0%", soilw: "12.06%" },
-{ id: "10", rpc: "NVDA", jurisdiction: "Brighton", wwtf: 0, service: "9.15%", soilw: "5.64%" },
-{ id: "11", rpc: "NVDA", jurisdiction: "Jay", wwtf: 0, service: "0%", soilw: "2.50%" },
-{ id: "12", rpc: "NVDA", jurisdiction: "Westfield", wwtf: 0, service: "0%", soilw: "5.55%" },
-{ id: "13", rpc: "NVDA", jurisdiction: "Lowell", wwtf: 0, service: "0%", soilw: "6.28%" },
-{ id: "14", rpc: "NVDA", jurisdiction: "Newport Town", wwtf: 0, service: "0%", soilw: "1.69%" },
-{ id: "15", rpc: "NVDA", jurisdiction: "Derby", wwtf: 0, service: "0%", soilw: "10.94%" },
+{ id: "1", rpc: "NVDA", jurisdiction: "Troy", wwtf: 2, service: "0%", soilw: "5.44%", coordinates: [44.9042, -72.4058] },
+{ id: "2", rpc: "NVDA", jurisdiction: "Newport City", wwtf: 1, service: "39.25%", soilw: "17.79%", coordinates: [44.9364, -72.2051] },
+{ id: "3", rpc: "NVDA", jurisdiction: "Lyndon", wwtf: 1, service: "18.08%", soilw: "21.21%", coordinates: [44.5453, -71.0001] },
+{ id: "4", rpc: "NVDA", jurisdiction: "Lunenburg", wwtf: 2, service: "0%", soilw: "0.29%", coordinates: [44.4631, -71.6820] },
+{ id: "5", rpc: "NVDA", jurisdiction: "Hardwick", wwtf: 1, service: "4.24%", soilw: "7.57%", coordinates: [44.5416, -72.3487] },
+{ id: "6", rpc: "NVDA", jurisdiction: "Coventry", wwtf: 1, service: "0%", soilw: "5.00%", coordinates: [44.8676, -72.2616] },
+{ id: "7", rpc: "NVDA", jurisdiction: "Canaan", wwtf: 2, service: "2.75%", soilw: "4.10%", coordinates: [44.9965, -71.5384] },
+{ id: "8", rpc: "NVDA", jurisdiction: "Barton", wwtf: 1, service: "4.12%", soilw: "4.03%", coordinates: [44.7481, -72.1763] },
+{ id: "9", rpc: "NVDA", jurisdiction: "Barnet", wwtf: 1, service: "0%", soilw: "12.06%", coordinates: [44.2968, -72.0494] },
+{ id: "10", rpc: "NVDA", jurisdiction: "Brighton", wwtf: 0, service: "9.15%", soilw: "5.64%", coordinates: [44.8057, -71.8548] },
+{ id: "11", rpc: "NVDA", jurisdiction: "Jay", wwtf: 0, service: "0%", soilw: "2.50%", coordinates: [44.9649, -72.4602] },
+{ id: "12", rpc: "NVDA", jurisdiction: "Westfield", wwtf: 0, service: "0%", soilw: "5.55%", coordinates: [44.8895, -72.4284] },
+{ id: "13", rpc: "NVDA", jurisdiction: "Lowell", wwtf: 0, service: "0%", soilw: "6.28%", coordinates: [44.7992, -72.4476] },
+{ id: "14", rpc: "NVDA", jurisdiction: "Newport Town", wwtf: 0, service: "0%", soilw: "1.69%", coordinates: [44.9507, -72.3067] },
+{ id: "15", rpc: "NVDA", jurisdiction: "Derby", wwtf: 0, service: "0%", soilw: "10.94%", coordinates: [44.9544, -72.1304] },
 { id: "16", rpc: "NVDA", jurisdiction: "Holland", wwtf: 0, service: "0%", soilw: "0.19%" },
 { id: "17", rpc: "NVDA", jurisdiction: "Morgan", wwtf: 0, service: "0%", soilw: "5.99%" },
 { id: "18", rpc: "NVDA", jurisdiction: "Charleston", wwtf: 0, service: "0%", soilw: "3.43%" },
@@ -132,90 +186,187 @@ const WIMArray = [
 { id: "83", rpc: "WRC", jurisdiction: "Winchester", wwtf: 0, service: "0%", soilw: "5.42%" }
 ];
 
-// Extract jurisdiction names and sort alphabetically
-const sortedJurisdictions = computed(() => 
-[...new Set(WIMArray.map(entry => entry.jurisdiction))]
-  .sort((a, b) => a.localeCompare(b))
-);
+// Populate the list of sorted jurisdictions
+const sortedJurisdictions = ref(WIMArray.map(item => item.jurisdiction).sort());
 
-// Default stats
 const stats = ref({
-rpc: "N/A",
-wwtf: "N/A",
-service: "N/A",
-soilw: "N/A"
+  rpc: '',
+  wwtf: '',
+  service: '',
+  soilw: '',
 });
 
-// Initialize Leaflet Map
-onMounted(() => {
-map.value = L.map('map').setView([44.2601, -72.5754], 8); // Centered on Vermont
+// Function to fetch GeoJSON data (lazy loading)
+const fetchGeoJSON = async (url, layerId, style) => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
-// Add CartoDB.Positron Base Layer
-L.tileLayer.provider('CartoDB.Positron').addTo(map.value);
+    // If the layer already exists, don't re-fetch it
+    if (layerCache.value[layerId]) {
+      return; // Skip if already loaded
+    }
 
-/* // Add OSM Base Layer --> More terrain visuals, but a little too busy
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map.value); */
+    const newLayer = L.geoJSON(data, {
+      style: style,
+      onEachFeature: (feature, layer) => {
+        layer.bindPopup(feature.properties.name);
+      }
+    }).addTo(map.value);
 
-/* // Add Stamen Toner Base Layer
-L.tileLayer('https://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="http://stamen.com">Stamen Design</a> &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map.value); */
-});
+    layerCache.value[layerId] = newLayer;
+  } catch (error) {
+    console.error(`Error loading ${layerId} GeoJSON:`, error);
+  }
+};
 
-// Update Map & Statistics when selection changes
+// Initialize map
+const initializeMap = () => {
+  map.value = L.map('map').setView([44.0, -72.7], 8); // Initially centered on Vermont
+
+  // Add CartoDB.Positron Base Layer
+  L.tileLayer.provider('CartoDB.Positron').addTo(map.value);
+
+  // Load Jurisdiction Borders
+  fetchGeoJSON('/Vermont-Livability-Map/Jurisdiction_Borders.geojson', 'jurisdictionBorders', {
+    color: '#036903', //Dark Green
+    weight: 1,
+    opacity: 0.5,
+    //fillColor: '#036903',
+    //fillOpacity: 0.1
+  });
+};
+
+// Toggle layers dynamically and stack them
+const toggleLayer = (layerId) => {
+  if (layers.value[layerId]) {
+    // If the checkbox is checked, load the layer if not already loaded
+    switch (layerId) {
+      case 'nvdaPointLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/NVDA_Point.geojson', 'nvdaPointLayer', {
+          color: '#ff0000', //Red
+          weight: 1,
+          opacity: 0.8,
+          fillColor: '#0000ff', //Blue
+          fillOpacity: 0.4
+        });
+        break;
+      case 'nvdaLinearLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/NVDA_Linear.geojson', 'nvdaLinearLayer', {
+          color: '#0000ff', //Blue
+          weight: 2,
+          opacity: 0.8,
+          fillColor: '#0000ff', //Blue
+          fillOpacity: 0.4
+        });
+        break;
+      case 'nvdaServiceLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/NVDA_Service.geojson', 'nvdaServiceLayer', {
+          color: '#ff0000', //Red
+          weight: 1,
+          opacity: 0.8,
+          fillColor: '#ff0000', //Red
+          fillOpacity: 0.4
+        });
+        break;
+      case 'nvdaWwtfLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/NVDA_WWTF.geojson', 'nvdaWwtfLayer', {
+          color: '#ff0000', //Red
+          weight: 1,
+          opacity: 0.8,
+          fillColor: '#ff0000', //Red
+          fillOpacity: 0.4
+        });
+        break;
+      case 'wrcPointLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/WRC_Point.geojson', 'wrcPointLayer', {
+          color: '#ff0000', //Red
+          weight: 1,
+          opacity: 0.8,
+          fillColor: '#ff0000', //Red
+          fillOpacity: 0.4
+        });
+        break;
+      case 'wrcLinearLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/WRC_Linear.geojson', 'wrcLinearLayer', {
+          color: '#0000ff', //Blue
+          weight: 2,
+          opacity: 0.8,
+          fillColor: '#0000ff', //Blue
+          fillOpacity: 0.4
+        });
+        break;
+      case 'wrcServiceLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/WRC_Service.geojson', 'wrcServiceLayer', {
+          color: '#ff0000', //Red
+          weight: 1,
+          opacity: 0.8,
+          fillColor: '#ff0000', //Red
+          fillOpacity: 0.4
+        });
+        break;
+      case 'wrcWwtfLayer':
+        fetchGeoJSON('/Vermont-Livability-Map/WRC_WWTF.geojson', 'wrcWwtfLayer', {
+          color: '#ff0000', //Red
+          weight: 1,
+          opacity: 0.8,
+          fillColor: '#ff0000', //Red
+          fillOpacity: 0.4
+        });
+        break;
+    }
+  } else {
+    // If unchecked, remove the layer
+    if (layerCache.value[layerId]) {
+      map.value.removeLayer(layerCache.value[layerId]);
+      layerCache.value[layerId] = null; // Reset the cached layer
+    }
+  }
+};
+
+// Function to update statistics when jurisdiction is selected
 const updateMap = () => {
-if (!selectedJurisdiction.value) return;
-
-// Get the selected jurisdiction's data
-const selectedData = WIMArray.find(entry => entry.jurisdiction === selectedJurisdiction.value);
-
-if (selectedData) {
-  stats.value = {
-    rpc: selectedData.rpc,
-    wwtf: selectedData.wwtf,
-    service: selectedData.service,
-    soilw: selectedData.soilw
-  };
-}
-
-// Example jurisdiction coordinates
-//TODO: reference fgb files instead of hard-coded coordinates
-const coordinates = {
-  "Troy": [44.9056, -72.4101],
-  "Newport City": [44.9364, -72.2056],
-  "Lyndon": [44.5322, -72.0033],
-  "Lunenburg": [44.4600, -71.6933],
-  "Hardwick": [44.5044, -72.3625],
-  "Coventry": [44.9017, -72.2469],
-  "Brattleboro": [42.8509, -72.5579],
-  "Windham": [43.1512, -72.7176]
+  if (selectedJurisdiction.value) {
+    // Find the coordinates of the selected jurisdiction from the WIMArray
+    const jurisdiction = WIMArray.find(item => item.jurisdiction === selectedJurisdiction.value);
+    
+    if (jurisdiction) {
+      // Update map center based on the selected jurisdiction's coordinates
+      map.value.setView(jurisdiction.coordinates, 15);  
+      // Update statistics
+      stats.value.rpc = jurisdiction.rpc;
+      stats.value.wwtf = jurisdiction.wwtf;
+      stats.value.service = jurisdiction.service;
+      stats.value.soilw = jurisdiction.soilw;
+    }
+  }
 };
 
-
-if (coordinates[selectedJurisdiction.value]) {
-  map.value.setView(coordinates[selectedJurisdiction.value], 12);
-}
-};
+// Initialize map when component is mounted
+onMounted(() => {
+  initializeMap();
+});
 </script>
 
 <style scoped>
-.search-container {
-margin: 20px;
-}
 #map {
-height: 500px;
-width: 100%;
-margin: 20px 0;
+  height: 500px;
+  width: 100%;
 }
+
+.layer-selector {
+  margin-top: 20px;
+}
+
 .statistics-box {
-background: #f8f8f8;
-padding: 20px;
-border-radius: 10px;
-max-width: 400px;
-margin: auto;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 50%;
+  border-radius: 10px;
+  background-color: #ececec;
 }
+
 .statistics-box h2 {
   text-align: center;
   font-weight: bolder;
