@@ -36,11 +36,11 @@
     },
     initialCenter: {
       type: Array,
-      default: () => [-72.5778, 44.4688]
+      default: () => [-72.1778, 44.0688]
     },
     initialZoom: {
       type: Number,
-      default: 6
+      default: 7
     },
     layerToHighlight: {
       type: String,
