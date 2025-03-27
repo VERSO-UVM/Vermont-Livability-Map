@@ -16,7 +16,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <!-- NEW -->
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
-        <router-link to="/regional">Regional Highlight</router-link> 
+        <router-link to="/regional">Regional Zoning</router-link> 
       </nav>
       </div>
     </div>  
