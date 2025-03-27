@@ -7,7 +7,7 @@
             This map is in Beta, and may contain inaccuracies.
         </div>
         <div class="controls">
-            <label style="margin-right: 10px" for="jurisdiction-search">Search Jurisdiction:</label>
+            <label style="margin-right: 10px" for="jurisdiction-search">Search for a Town:</label>
             <input
                 id="jurisdiction-search"
                 type="text"
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div v-if="filteredData.length" class="data-summary">
-            <h4>Jurisdiction Summary</h4>
+            <h4>Town Summary</h4>
             <table>
                 <thead>
                     <tr>

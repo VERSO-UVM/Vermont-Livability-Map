@@ -3,7 +3,10 @@
 <template>
     <div class="about">
       <div class="about-container">
-      <h1 class="title" style="margin-top: 50px">Select a region</h1>
+      <h1 class="title" style="margin-top: 50px">Select a Town</h1>
+      <p>
+        This interactive interface allows you to explore the zoning regulations of different towns in the region. Type in a town and click Search to view its zoning regulations.
+      </p>
       <ZoningMap 
           mapboxToken="pk.eyJ1IjoiYmRjb29sZXkiLCJhIjoiY20zM2Nzd212MWl3cTJrcTM5NWNrcjk0byJ9.40rHMMd1TXsvF8zeqxLaBw"
            />
@@ -29,4 +32,3 @@ import ZoningMap from '@/components/RegionalMapHighlight.vue';
       margin-top: 30px
     }
   </style>
-  
