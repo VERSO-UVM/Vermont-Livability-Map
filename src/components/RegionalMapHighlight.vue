@@ -191,14 +191,17 @@ const applyJurisdictionFilter = () => {
         let foundFeatures = 0;
 
         mapFeatures.value.forEach((feature) => {
-            if (feature.properties.Jurisdiction === searchQuery.value && feature.geometry) {
-                foundFeatures++;
-                const coords = feature.geometry.coordinates;
-                if (feature.geometry.type === 'Polygon') {
-                    coords[0].forEach((coord) => bounds.extend(coord));
-                } else if (feature.geometry.type === 'Point') {
-                    bounds.extend(coords);
-                }
+            if (feature.properties.Jurisdiction.toLowerCase() === searchQuery.value.toLowerCase() && feature.geometry) {
+            foundFeatures++;
+            const coords = feature.geometry.coordinates;
+            if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+                const polygons = feature.geometry.type === 'Polygon' ? [coords] : coords;
+                polygons.forEach((polygon) => {
+                polygon[0].forEach((coord) => bounds.extend(coord));
+                });
+            } else if (feature.geometry.type === 'Point') {
+                bounds.extend(coords);
+            }
             }
         });
 
@@ -214,28 +217,47 @@ const applyJurisdictionFilter = () => {
             map.fitBounds(bounds, { padding: 50 });
             lastValidBounds = bounds; // Update the last valid bounds
         } else {
-            console.warn("Bounds are empty. Unable to fit map.");
-            if (mapFeatures.value.length > 0) {
-                // use default bounds
-                console.log("Using default bounds as fallback.");
-                const defaultBounds = new mapboxgl.LngLatBounds([-73.5, 42.5], [-71.5, 45.0]); // Example default bounds
-                map.fitBounds(defaultBounds, { padding: 50 });
-            } else if (lastValidBounds) {
-                console.log("Using last valid bounds as fallback:", lastValidBounds);
-                map.fitBounds(lastValidBounds, { padding: 50 });
+            console.warn("Bounds are empty. Attempting to use fallback bounds.");
+            if (lastValidBounds) {
+            console.log("Using last valid bounds as fallback:", lastValidBounds);
+            map.fitBounds(lastValidBounds, { padding: 50 });
+            } else if (mapFeatures.value.length > 0) {
+            console.log("Calculating fallback bounds from all features.");
+            const fallbackBounds = new mapboxgl.LngLatBounds();
+            mapFeatures.value.forEach((feature) => {
+                if (feature.geometry) {
+                const coords = feature.geometry.coordinates;
+                if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+                    const polygons = feature.geometry.type === 'Polygon' ? [coords] : coords;
+                    polygons.forEach((polygon) => {
+                    polygon[0].forEach((coord) => fallbackBounds.extend(coord));
+                    });
+                } else if (feature.geometry.type === 'Point') {
+                    fallbackBounds.extend(coords);
+                }
+                }
+            });
+            if (!fallbackBounds.isEmpty()) {
+                map.fitBounds(fallbackBounds, { padding: 50 });
+                lastValidBounds = fallbackBounds; // Update the last valid bounds
             } else {
-                console.warn("No fallback bounds available. Using default bounds.");
+                console.warn("Fallback bounds are also empty. Using default bounds.");
                 const defaultBounds = new mapboxgl.LngLatBounds([-73.5, 42.5], [-71.5, 45.0]); // Example default bounds
                 map.fitBounds(defaultBounds, { padding: 50 });
             }
+            } else {
+            console.warn("No fallback bounds available. Using default bounds.");
+            const defaultBounds = new mapboxgl.LngLatBounds([-73.5, 42.5], [-71.5, 45.0]); // Example default bounds
+            map.fitBounds(defaultBounds, { padding: 50 });
+            }
         }
-    } else {
+        } else {
         console.log("No jurisdiction selected. Resetting filter.");
         map.setFilter('fgb-layer', null); // Show all features if no jurisdiction is selected
         filteredData.value = []; // Clear the filtered data
         displayedData.value = []; // Clear the displayed data
         uniqueObjectCount.value = 0; // Reset the unique object count
-    }
+        }
 };
 
 watch(props, (newProps) => {
