@@ -103,13 +103,13 @@ sup {
 
 <template>
   <main>
-    <div class="container has-text-centered" style="max-width: 700px; margin-top: 100px; margin-bottom: 100px">
+    <div class="container has-text-centered" style="max-width: 700px; margin-top: 50px; margin-bottom: 50px">
       <p style="font-size: 1.5rem;">
-        The Vermont Livability Map is a pilot project of to explore how create database and web tools that brings together zoning laws and other datasets to help answer fundamental questions facing cities and towns: for the land that we have, what can be built?
+        The Vermont Livability Map is a pilot project to create databases and web tools to help answer fundamental questions facing cities and towns in Vermont: for the land that we have, what can be built?
       </p>
     </div>
     <section class="section is-medium">
-      <h1 class="title">Zoning is complex. We tried to bring it all together.</h1>
+      <h1 class="title">Housing is complex. We tried to bring it all together.</h1>
       <h2 class="subtitle">
         
       </h2>
@@ -119,10 +119,13 @@ sup {
         </div>
         <div class="column is-half">
           <p>
-            Zoning laws regulate the types of housing that can be built. But for ordinary people, they can be complex, overwhelming, and hard to find. The Vermont Zoning Atlas takes inspiration from the National Zoning Atlas project to "digitize, demystify, and democratize information" that is often hidden under many layers of hard to parse paperwork. 
+            Housing is a complex problem due to a mix of economic, social, and policy factors. For example: zoning laws regulate the types of housing that can be built but whether there is a septic system, access high-speed internet, close to schools and job all impact on whether housing is actually built.
           </p>
           <p>
-            As a rural state, Vermont's zoning laws can be especially difficult to find and understand. In Vermont 75% of land has some form of zoning with 88% of that being primarily residential or mixed with residential.  Many towns use their own methods of record keeping and governance. But we believe that universal access to this information is critical for smart community growth.
+            Just tackling how to understand zoning can be complex, overwhelming and hard to find. The Vermont Livability Map takes inspiration from the National Zoning Atlas project to "digitize, demystify, and democratize information" that is often hidden under many layers of hard to parse paperwork. 
+          </p>
+          <p>
+            As a rural state, Vermont's zoning laws can be especially difficult to find and understand. Many towns use their own methods of record keeping and governance. But we believe that universal access to this information is critical for smart community growth.
           </p>
         </div>
       </div>
@@ -133,10 +136,13 @@ sup {
       <div class="columns">
         <div class="column">
           <p>
-            The <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">Vermont Zoning Atlas</a> began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia.
+            The <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">Vermont Zoning Atlas</a> began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia. It inspired the creation of the Wastewater Infrastructure Mapping Project and the creating of this tool to understand it all. 
+            </p>
+            <p>
+            This project is a collaboration between the University of Vermont, the Vermont Center for Geographic Information, and the Vermont Agency of Commerce and Community Development, Vermont Housing Finance Agency and many more. We are grateful for the support of the Vermont Community Foundation, private donations, and the hard work of our volunteers.
           </p>
           <p>
-            
+            The Livability Map contains data on zoning, wastewater, and flood basins, all of which are in various levels of completion. We hope to add more data in the future to help Vermonters understand the complex systems that govern our communities.
  
           </p>
         </div>
@@ -173,8 +179,9 @@ sup {
       </div>
     </section>
     <section class="" id="zoning-overview">
-      <h1 class="title">Permitting Requirements for Building Homes for Vermont</h1>
+      <h1 class="title">Zoning Requirements for Building Homes for Vermont</h1>
       <h2 class="subtitle">
+        <br>
         In housing permitting, "by right" means a project can be built if it follows all the rules, without needing extra approvals. "Public hearing" means the project must be reviewed in a meeting where people can share their opinions before it gets approved. In Vermont 25% of land is unzoned, but for the rest what is the process for building homes? 
       </h2>
       <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; position: relative;">>
@@ -278,7 +285,7 @@ sup {
             </div>
             <div class="step centered" data-step-no="7">
             <p>
-                Finally, let's add zoning data underneath it all. 
+                Finally, let's add zoning data underneath it all. Red is nonresidential, blue is mixed use, and purple is primarily residential.
               </p>
             </div>
             <div class="step centered" data-step-no="8">
