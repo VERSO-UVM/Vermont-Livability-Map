@@ -14,9 +14,12 @@ import { ref, onMounted } from 'vue';
 
 const props = defineProps({
   percentage: {
-    type: Number,
+    type: String,
     required: true,
-    validator: (value) => value >= 0 && value <= 100
+    validator: (value) => {
+      const numberValue = Number(value);
+      return !isNaN(numberValue) && numberValue >= 0 && numberValue <= 100;
+    }
   },
   title: {
     type: String,
