@@ -194,7 +194,7 @@ let map;
                 let features = [];
                 
                 // Start streaming features from the FGB file
-                const response = await fetch('../data/vt-zoning-spatial-index.fgb');
+                const response = await fetch('../data/vt-zoning75*.fgb');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 
                 // Use FlatGeoBuf streaming API

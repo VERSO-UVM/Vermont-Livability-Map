@@ -1,7 +1,7 @@
 import geopandas as gpd
 
 # Read the FlatGeobuf file
-gdf = gpd.read_file("vt-zoning.fgb")
+gdf = gpd.read_file("../data/vt-zoning.fgb")
 
 # Calculate total area
 total_area = gdf.geometry.area.sum()

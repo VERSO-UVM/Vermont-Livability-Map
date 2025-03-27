@@ -3,7 +3,11 @@ import MontpelierMap from '@/components/MontpelierMap.vue';
 import ZoningMap from '@/components/ZoningMap.vue';
 import { ref } from 'vue';
 import { watch } from 'vue';
-import StackedBar from '@/components/StackedBar.vue';
+import StackedBarOverall from '@/components/StackedBarOverall.vue';
+import StackedBar1F from '@/components/StackedBar1F.vue';
+import StackedBar2F from '@/components/StackedBar2F.vue';
+import StackedBar3F from '@/components/StackedBar3F.vue';
+import StackedBar4F from '@/components/StackedBar4F.vue';
 
 import VueScrollama from 'vue3-scrollama'
     let currStep = ref(null);
@@ -132,7 +136,7 @@ sup {
             The <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">Vermont Zoning Atlas</a> began as a grassroots civic tech project run by a team of community volunteers, student interns, and a Steering Committee of stakeholders from the public and private sectors and academia.
           </p>
           <p>
-            Zoning is complicated, 93% of total residential zones land allowing single family homes by right and 7% require public hearing. As the number of households grow, the percentage of those that can be built without a public hearing decreases. In Vermont zoned land, 82% allow 2 family homes with 67% by right and 15% by public hearing. 3 family homes are allowed on 50% of zoned land with 12% by right and 38% by public hearing. 4 family homes are allowed on 48% of zoned land with 3% by right and 45% by public hearing.
+            
  
           </p>
         </div>
@@ -169,13 +173,24 @@ sup {
       </div>
     </section>
     <section class="" id="zoning-overview">
-      <h1 class="title">The Vermont Zoning Atlas</h1>
+      <h1 class="title">Permitting Requirements for Building Homes for Vermont</h1>
       <h2 class="subtitle">
-        All the land we have, and what can be built there.
+        In housing permitting, "by right" means a project can be built if it follows all the rules, without needing extra approvals. "Public hearing" means the project must be reviewed in a meeting where people can share their opinions before it gets approved. In Vermont 25% of land is unzoned, but for the rest what is the process for building homes? 
       </h2>
-      <div style="position: relative">
-        <StackedBar :width="800" :height="100" />
+      <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; position: relative;">>
+  
+        <StackedBar1F :width="800" :height="100" />
+      
+        <StackedBar2F :width="800" :height="100" />
+      
+        <StackedBar3F :width="800" :height="100" />
+      
+        <StackedBar4F :width="800" :height="100" />
       </div>
+      <h1 class="title">Exploring the Zoning Atlas</h1>
+      <h2 class="subtitle">
+        Exploring the Zoning Atlas Map can tell us a little more about how zoning may be different by region. Keep scrolling down to see the map and learn more about the data.
+      </h2>
       <div class="columns">
         <div class="column is-one-thid">
           <VueScrollama
@@ -202,9 +217,12 @@ sup {
                 And here are the areas for <strong>nonresidential</strong> buildings.
               </p>
             </div>
+
+            
         </VueScrollama>
           
         </div>
+        
         <div class="column is-two-thirds">
           <ZoningMap 
           class="sticky"
