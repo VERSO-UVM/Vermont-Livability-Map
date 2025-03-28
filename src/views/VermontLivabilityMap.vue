@@ -21,7 +21,7 @@
       <div class="layer-selector">
         <h2>Select Layers:</h2>
         <label class="check-container">
-          <input type="checkbox" class="standard" v-model="layers.nvdaPointLayer" @change="toggleLayer('nvdaPointLayer')">
+          <input type="checkbox" class="cyan" v-model="layers.nvdaPointLayer" @change="toggleLayer('nvdaPointLayer')">
           NVDA Point Layer
         </label>
         <label class="check-container">
@@ -33,11 +33,11 @@
           NVDA Service Layer
         </label>
         <label class="check-container">
-          <input type="checkbox" class="standard" v-model="layers.nvdaWwtfLayer" @change="toggleLayer('nvdaWwtfLayer')">
+          <input type="checkbox" class="green" v-model="layers.nvdaWwtfLayer" @change="toggleLayer('nvdaWwtfLayer')">
           NVDA WWTF Layer
         </label>
         <label class="check-container">
-          <input type="checkbox" class="standard" v-model="layers.wrcPointLayer" @change="toggleLayer('wrcPointLayer')">
+          <input type="checkbox" class="cyan" v-model="layers.wrcPointLayer" @change="toggleLayer('wrcPointLayer')">
           WRC Point Layer
         </label>
         <label class="check-container">
@@ -49,7 +49,7 @@
           WRC Service Layer
         </label>
         <label class="check-container">
-          <input type="checkbox" class="standard" v-model="layers.wrcWwtfLayer" @change="toggleLayer('wrcWwtfLayer')">
+          <input type="checkbox" class="green" v-model="layers.wrcWwtfLayer" @change="toggleLayer('wrcWwtfLayer')">
           WRC WWTF Layer
         </label>
       </div>
@@ -207,14 +207,26 @@ const fetchGeoJSON = async (url, layerId, style) => {
 
     // If the layer already exists, don't re-fetch it
     if (layerCache.value[layerId]) {
-      return; // Skip if already loaded
+      return;
     }
 
+    // Determine color based on the filename in the URL
+    const isWWTF = url.includes("WWTF");
+    const color = isWWTF ? "#229106" : "#05e8f0"; // Green for WWTF, cyan otherwise
+
     const newLayer = L.geoJSON(data, {
-      style: style,
+      pointToLayer: (feature, latlng) => {
+        return L.circleMarker(latlng, {
+          radius: 4, // Adjust size of circle
+          color: color, // Outline color
+          fillColor: color, // Fill color
+          fillOpacity: 0.8, // Opacity
+        });
+      },
+      style: style, // Only applies to polygons/lines
       onEachFeature: (feature, layer) => {
         layer.bindPopup(feature.properties.name);
-      }
+      },
     }).addTo(map.value);
 
     layerCache.value[layerId] = newLayer;
@@ -222,6 +234,8 @@ const fetchGeoJSON = async (url, layerId, style) => {
     console.error(`Error loading ${layerId} GeoJSON:`, error);
   }
 };
+
+
 
 // Initialize map
 const initializeMap = () => {
@@ -246,16 +260,7 @@ const toggleLayer = (layerId) => {
     switch (layerId) {
       case 'nvdaPointLayer':
       fetchGeoJSON('/Vermont-Livability-Map/NVDA_Point.geojson', 'nvdaPointLayer', {
-        /*pointToLayer: function(feature, latlng) {
-            return L.marker(latlng, { 
-                icon: L.icon({
-                    iconUrl: '../point-icon.png', // Change this to your actual icon path
-                    iconSize: [25, 25], // Width and height
-                    iconAnchor: [12, 25], // Anchor point
-                    popupAnchor: [0, -25] // Popup position
-                })
-            });
-        }*/
+        //pointToLayer: (feature, latlng) => L.marker(latlng, { icon: customIcon })
       });
         break;
       case 'nvdaLinearLayer':
@@ -278,30 +283,12 @@ const toggleLayer = (layerId) => {
         break;
       case 'nvdaWwtfLayer':
         fetchGeoJSON('/Vermont-Livability-Map/NVDA_WWTF.geojson', 'nvdaWwtfLayer', {
-          /*pointToLayer: function(feature, latlng) {
-              return L.marker(latlng, { 
-                  icon: L.icon({
-                      iconUrl: '/Vermont-Livability-Map/wwtf-icon.png', // Change this to your actual icon path
-                      iconSize: [25, 25], // Width and height
-                      iconAnchor: [12, 25], // Anchor point
-                      popupAnchor: [0, -25] // Popup position
-                  })
-              });
-          }*/
+          //pointToLayer: (feature, latlng) => L.marker(latlng, { icon: customIcon })
         });
         break;
       case 'wrcPointLayer':
         fetchGeoJSON('/Vermont-Livability-Map/WRC_Point.geojson', 'wrcPointLayer', {
-          /*pointToLayer: function(feature, latlng) {
-              return L.marker(latlng, { 
-                  icon: L.icon({
-                      iconUrl: '/Vermont-Livability-Map/point-icon.png', // Change this to your actual icon path
-                      iconSize: [25, 25], // Width and height
-                      iconAnchor: [12, 25], // Anchor point
-                      popupAnchor: [0, -25] // Popup position
-                  })
-              });
-          }*/
+          //pointToLayer: (feature, latlng) => L.marker(latlng, { icon: customIcon })
         });
         break;
       case 'wrcLinearLayer':
@@ -324,16 +311,7 @@ const toggleLayer = (layerId) => {
         break;
       case 'wrcWwtfLayer':
         fetchGeoJSON('/Vermont-Livability-Map/WRC_WWTF.geojson', 'wrcWwtfLayer', {
-          /*pointToLayer: function(feature, latlng) {
-              return L.marker(latlng, { 
-                  icon: L.icon({
-                      iconUrl: '/Vermont-Livability-Map/wwtf-icon.png', // Change this to your actual icon path
-                      iconSize: [25, 25], // Width and height
-                      iconAnchor: [12, 25], // Anchor point
-                      popupAnchor: [0, -25] // Popup position
-                  })
-              });
-          }*/
+          //pointToLayer: (feature, latlng) => L.marker(latlng, { icon: customIcon })
         });
         break;
     }
@@ -482,17 +460,22 @@ onMounted(() => {
   transform: translateX(20px);
 }
 
-/* Standard toggle */
-.check-container input.standard:checked {
-  background: #3b87bf;
+/* Orange Point toggle */
+.check-container input.cyan:checked {
+  background: #05e8f0;
 }
 
-/* Red toggle */
+/* Purple WWTF toggle */
+.check-container input.green:checked {
+  background: #229106;
+}
+
+/* Red Service toggle */
 .check-container input.red:checked {
   background: #ff0000;
 }
 
-/* Blue toggle */
+/* Blue Linear toggle */
 .check-container input.blue:checked {
   background: #0000ff;
 }
