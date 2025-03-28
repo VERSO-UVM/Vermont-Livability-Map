@@ -4,15 +4,26 @@
     <h1 class="title" style="margin-top: 50px">About the Vermont Livability Map</h1>
       <h3 class="subtitle">Origins</h3>
       <p>
-        <b><i>THIS PROJECT IS UNDER DEVELOPMENT AND MAY CONTAIN INACCURACIES. PLEASE USE AT YOUR OWN RISK.</i></b>
+        <b><i>THIS PROJECT IS UNDER DEVELOPMENT (AS ARE THE DATASETS) AND MAY CONTAIN INACCURACIES. PLEASE USE AT YOUR OWN RISK.</i></b>
       </p>
+       <ul>
+        <li>Website: <a href="https://verso-uvm.github.io/Vermont-Livability-Map/" target="_blank">https://verso-uvm.github.io/Vermont-Livability-Map/</a></li>
+        <li>GitHub Repo: <a href="https://github.com/VERSO-UVM/Vermont-Livability-Map" target="_blank">https://github.com/VERSO-UVM/Vermont-Livability-Map</a></li>
+       </ul> 
+      <br>
       <p>
-        The Vermont Livability Map is a project of the <a href="https://verso.w3.uvm.edu/" target="_blank">Vermont Research Open Source Program Office (VERSO)</a>, the <a href="https://vermontcomplexsystems.org/" target="_blank">Vermont Complex Systems Institute</a>  and the <a href="https://www.uvm.edu/ruralpartnerships" target="_blank">Leahy Institute for Rural Partnerships</a> at the University of Vermont (UVM) along with undergraduate student interns in the Open Research Community Accelerator (ORCA) program. It evolved from the creation of the Vermont Zoning Atlas and the Wastewater Infrastructure mapping projects to explore ways to provide accessibility to complicated datasets to understand the livability crisis in Vermont
+        The Vermont Livability Map is a project of the <a href="https://verso.w3.uvm.edu/" target="_blank">Vermont Research Open Source Program Office (VERSO)</a>, the <a href="https://vermontcomplexsystems.org/" target="_blank">Vermont Complex Systems Institute</a>  and the <a href="https://www.uvm.edu/ruralpartnerships" target="_blank">Leahy Institute for Rural Partnerships</a> at the University of Vermont (UVM) along with undergraduate student interns in the Open Research Community Accelerator (ORCA) program. It evolved from the creation of the Vermont Zoning Atlas and the Wastewater Infrastructure mapping projects to explore ways to provide accessibility to complicated datasets to understand the livability crisis in Vermont.
       </p>
-      <p>
-        
-      </p>
+  
       <h3 class="subtitle">The Vermont Zoning Atlas Data</h3>
+
+      <ul >
+        <li>Website: <a href="https://verso-uvm.github.io/Vermont-Zoning-Atlas/" target="_blank">https://verso-uvm.github.io/Vermont-Zoning-Atlas</a></li>
+        <li>GitHub: <a href="https://github.com/VERSO-UVM/Vermont-Zoning-Atlas" target="_blank">https://github.com/VERSO-UVM/Vermont-Zoning-Atlas</a></li>
+        <li>VCGI Demo Map VT Zoning Atlas: <a href="https://vcgi.maps.arcgis.com/apps/instant/sidebar/index.html?appid=ef6d697e2b1c4cec8457cb859f17ab90" target="_blank">https://vcgi.maps.arcgis.com/apps/instant/sidebar/index.html?appid=ef6d697e2b1c4cec8457cb859f17ab90</a></li>
+        <li>Abbreviated Zoning Map <a href="https://uvm.maps.arcgis.com/apps/mapviewer/index.html?layers=f1b05882e6b14382b6f664496853a875" target="_blank">https://uvm.maps.arcgis.com/apps/mapviewer/index.html?layers=f1b05882e6b14382b6f664496853a875</a></li>
+      </ul>
+      <br>
       <p>
         Inspired by Sara Bronin’s keynote speech at the 2022 Vermont Statewide Housing Conference, University of Vermont students Yoshi Bird and Michael Arnold approached the state and other partners about creating a dataset that could visualize geospatial distributions of land use regulations across Vermont down to the individual district level. Emily Sun, a planner from New York City and Middlebury graduate, volunteered as the founding Zoning Analyst Team Lead, supported by Dr. William Hegman of Middlebury College, while Colin Dowey, former of the Agency of Commerce and Community Development, acted as the consulting Geospatial Lead.
       </p>
@@ -32,12 +43,32 @@
       In August 2024, the project officially transferred ownership to VERSO and the University of Vermont’s Open Source Programs Office under the leadership of Director Kendall Fortney, which will continue to coordinate the ongoing collection of a custom data subset in partnership with the Regional Planning Commissions, Town Planners, the Agency of Commerce and Community Development, and the Vermont Center for Geographic Information. Additional projects, like this site, will be created to explore the Vermont Zoning Atlas data and its implications for Vermont’s future along with other datasets.
       </p>
       <h3 class="subtitle">The Wastewater Infrastructure Data</h3>
+ 
+      <ul >
+        <li>GitHub Repo: <a href="https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping" target="_blank">https://github.com/VERSO-UVM/Wastewater-Infrastructure-Mapping</a></li>
+      </ul>
+      <br>
       <p>
         The Wastewater Infrastructure Mapping project, led by the ORCA Pod in collaboration with the Windham Regional Commission and funded by the Leahy Institute for Rural Partnerships, aims to address Vermont’s village centers’ lack of public water and sewer systems by building a comprehensive town-level dataset of wastewater resources. This effort is essential for supporting housing development, economic sustainability, and future community growth in alignment with Vermont’s settlement patterns. Without public infrastructure, new development is hindered, leading to a housing crisis and jeopardizing business retention. By systematically mapping existing wastewater infrastructure data and filling gaps, the project will help identify ideal locations for new development and inform strategic public investments. 
       </p>
       <p>
         Working with partners like VCGI and state agencies, UVM  have been compiling and publishing this data, supporting both immediate development challenges and broader state goals for sustainable growth and resilience. This, in conjunction with the Vermont Zoning Atlas will help to determine the capacity and potential ideal locations for growing housing. These efforts aims not only to address immediate development challenges but also to align with broader state objectives outlined in the 
       </p>
+      <h3 class="subtitle">Lake Champlain Basin Lidar-Informed Flood Inundation</h3>
+
+      <ul>
+        <li>Release Article: <a href="https://vcgi.vermont.gov/vcgi/data-release/lake-champlain-basin-lidar-informed-flood-inundation-layer-now-available" target="_blank">https://vcgi.vermont.gov/vcgi/data-release/lake-champlain-basin-lidar-informed-flood-inundation-layer-now-available</a></li>
+        <li>2022 Release Lake Champlain Basin Flood Inundation Layer <a href="https://geodata.vermont.gov/datasets/b05be7a01d56484593a2137c659bcb92/explore">Portal Item</a> | <a href="https://geodata.vermont.gov/datasets/b05be7a01d56484593a2137c659bcb92/explore?location=44.4741,-73.2122,12.00">Feature Service Endpoint</a> | <a href="https://geodata.vermont.gov/datasets/b05be7a01d56484593a2137c659bcb92/explore?location=44.4741,-73.2122,12.00">OGC WFS Item Page</a> | <a href="https://geodata.vermont.gov/datasets/b05be7a01d56484593a2137c659bcb92/explore?location=44.4741,-73.2122,12.00">Endpoint</a></li>
+        <li>2022 Release Lake Champlain Basin Modeled Stream Reaches <a href="https://geodata.vermont.gov/datasets/2ac04b00651d4f399c54160643e5b53e_0/explore">Portal Item</a></li>
+      </ul>
+
+      <p>
+        The Vermont Center for Geographic Information (VCGI) in collaboration with researchers at the University of Vermont has released a detailed flood inundation layer for the Vermont portion of the Lake Champlain Basin. This innovative product, informed by high-resolution lidar data collected between 2013 and 2017, depicts the lateral extent of flooding for eight modeled storm sizes, ranging from 2 to 500-year recurrence intervals. Created by researchers at the University of Vermont, the layer is intended for planning and research purposes, offering valuable insights into flood risks and supporting conservation and restoration efforts. While not a substitute for FEMA's National Flood Hazard Layer, this new tool exemplifies the potential of lidar data in enhancing our understanding of flood hazards.
+      </p>
+      <strong>Floodwater Data Citation</strong>
+      <div class="citation">
+        1. Diehl, R.M, J.D. Gourevitch, S. Drago, B.C. Wemple (2021). Improving flood hazard datasets using a low-complexity, probabilistic floodplain mapping approach. Plos one, 16(3), e0248683. (<a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0248683" target="_blank">Article Link - Open Access</a>)
+      </div>
     
       <h3 class="subtitle">Support</h3>
       <p>
