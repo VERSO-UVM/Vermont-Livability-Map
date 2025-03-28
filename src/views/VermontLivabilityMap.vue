@@ -235,8 +235,6 @@ const fetchGeoJSON = async (url, layerId, style) => {
   }
 };
 
-
-
 // Initialize map
 const initializeMap = () => {
   map.value = L.map('map').setView([44.0, -72.7], 7); // Initially centered on Vermont
