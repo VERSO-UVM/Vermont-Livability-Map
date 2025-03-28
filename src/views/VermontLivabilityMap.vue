@@ -65,7 +65,7 @@
         <li><strong>RPC: </strong> {{ stats.rpc }}</li>
         <li><strong>Number of waste water treatment facilities: </strong> {{ stats.wwtf }}</li>
         <li><strong>Percent of jurisdiction (by area) covered by municipal water: </strong>{{ stats.service }}</li>
-        <li><strong>Percent of jurisdiction (by area) wuth well suited soils for septic systems: </strong>{{ stats.soilw }}</li>
+        <li><strong>Percent of jurisdiction (by area) with well suited soils for septic systems: </strong>{{ stats.soilw }}</li>
       </ul>
     </div>
   </main>
