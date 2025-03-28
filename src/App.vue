@@ -17,7 +17,7 @@ import router from './router';
         <!-- NEW -->
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
-        <router-link to="/regional">Regional Highlight</router-link> 
+        <router-link to="/regional">Regional Zoning</router-link> 
         <router-link to="/vermont-livability">Towns</router-link>
       </nav>
       </div>

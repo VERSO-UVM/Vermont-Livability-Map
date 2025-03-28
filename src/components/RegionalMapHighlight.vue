@@ -40,7 +40,9 @@
             </div>
         </div>
         <div v-if="filteredData.length" class="data-summary">
-            <h4>Town Summary</h4>
+            <br>
+            <h3 style="text-align: center;font-weight: 600; font-size: 2rem">District Table</h3>
+            <br>
             <table>
                 <thead>
                     <tr>
@@ -100,7 +102,7 @@ const filteredJurisdictions = ref([]);
 const filteredData = ref([]);
 
 // Reactive data for display fields and unique object count
-const displayFields = ref(["Full_District_Name","Affordable_Housing_District", "Type_of_Zoning_District"]); // Specify fields to display
+const displayFields = ref(["Full_District_Name", "Type_of_Zoning_District", "F1_Family_Treatment", "F2_Family_Treatment", "F3_Family_Treatment", "F4_Family_Treatment"]); // Specify fields to display
 const displayedData = ref([]); // Store filtered data for specified fields
 const uniqueObjectCount = ref(0); // Store the count of unique objects
 
@@ -595,7 +597,7 @@ onUnmounted(() => {
 }
 
 #zoning-map {
-    margin-top: 20px
+    margin-top: 0px
 }
 
 #zoning-map { width: 100%; height: 700px; }
@@ -724,6 +726,7 @@ table th {
 
 .data-summary {
     margin-top: 20px;
+    overflow-x: scroll;
 }
 
 .data-summary table {

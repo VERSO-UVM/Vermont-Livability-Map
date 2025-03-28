@@ -121,7 +121,7 @@ sup {
   .sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 100px;
+    top: 10px;
   }
 
   .level-item .title {
