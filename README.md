@@ -2,6 +2,8 @@
 
 [Vermont Livability Map Page](https://verso-uvm.github.io/Vermont-Livability-Map/
 )
+Here is a link to the ANR webmap [https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74](https://vtanr.maps.arcgis.com/apps/mapviewer/index.html?webmap=de7e8f0627b5482a851b379e29200a74)
+Here is a link to the current water infrastrcture on the Geodata portal [https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about](https://geodata.vermont.gov/maps/01210da4457d42a1bbcc43f7e54cbad6/about)
 
 The **Vermont Livability Map** is an open-source tool developed by VERSO-UVM to visualize critical datasets that influence the quality of life across Vermont. This interactive map aims to support policymakers, planners, researchers, and community members in making informed decisions related to zoning, infrastructure, and environmental resilience.
 
